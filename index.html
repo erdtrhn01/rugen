@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUGEN — Made to Endure</title>
+<meta name="description" content="RUGEN; taktik, outdoor ve everyday carry kategorilerinde minimalist, dayanıklı ve fonksiyonel ekipman markası.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header id="siteHeader">
+  <a class="logo" aria-label="RUGEN" href="index.html">
+    <span class="brand-img mark mark-dark" aria-hidden="true"></span>
+    <span class="brand-img mark mark-light" aria-hidden="true"></span>
+    <span class="brand-img word word-dark" aria-hidden="true"></span>
+    <span class="brand-img word word-light" aria-hidden="true"></span>
+  </a>
+  <nav class="links">
+    <a href="shop.html" data-en="Products">Ürünler</a>
+    <a href="index.html#kanit" data-en="Testing &amp; Proof">Test &amp; Kanıt</a>
+    <a href="index.html#malzeme" data-en="Materials">Malzeme</a>
+    <a href="index.html#degerler" data-en="Brand">Marka</a>
+    <a href="index.html#iletisim" data-en="Contact">İletişim</a>
+  </nav>
+  <div class="header-actions">
+    <button class="lang-toggle" id="langToggle" role="switch" aria-checked="false" aria-label="Language / Dil">
+      <span class="lang-track">
+        <span class="lang-knob"></span>
+        <span class="lang-opt">TR</span>
+        <span class="lang-opt">EN</span>
+      </span>
+    </button>
+    <div class="kasa-wrap">
+      <button class="kasa-toggle" id="kasaToggle" aria-label="Arayüz Seçenekleri" aria-haspopup="true" aria-expanded="false"><span class="icon-mask icon-vault" aria-hidden="true"></span></button>
+      <div class="iface-menu" id="ifaceMenu">
+        <h5 data-en="Interfaces">Arayüzler</h5>
+        <a href="kasa.html" class="iface-user" data-en="Product Vault">Ürün Kasası</a>
+        <a href="siparislerim.html" class="iface-seller" data-en="My Orders">Siparişlerim</a>
+      </div>
+    </div>
+    <button class="login-toggle" id="loginToggle" aria-label="Giriş"><span class="icon-mask icon-login" aria-hidden="true"></span></button>
+    <button class="cart-toggle" id="cartToggle" aria-label="Sepet">
+      <span class="icon-mask icon-cart" aria-hidden="true"></span>
+      <span class="cart-count" id="cartCount" hidden>0</span>
+    </button>
+    <button class="menu-toggle" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3 data-en="Your Cart">Sepetiniz</h3>
+    <button class="cart-close" id="cartClose" aria-label="Kapat">&#10005;</button>
+  </div>
+  <div class="cart-items" id="cartItems"><p class="cart-empty" data-en="Your cart is empty.">Sepetiniz boş.</p></div>
+  <div class="cart-foot">
+    <div class="cart-total"><span data-en="Subtotal">Ara Toplam</span><span id="cartTotal">₺0</span></div>
+    <a href="odeme.html" class="btn btn-cart-checkout" id="cartCheckout" data-en="Complete Order">Siparişi Tamamla</a>
+  </div>
+</aside>
+
+<div class="login-overlay" id="loginOverlay"></div>
+<div class="login-modal" id="loginModal" role="dialog" aria-label="Giriş">
+  <button class="login-close" id="loginClose" aria-label="Kapat">&#10005;</button>
+  <div class="login-mark"><span class="icon-mask icon-login" aria-hidden="true"></span></div>
+  <div class="login-state out">
+  <h3 data-en="Sign In">Giriş Yap</h3>
+  <p class="login-sub" data-en="Sign in to your product dashboard.">Ürün kontrol paneliniz için giriş yapın.</p>
+  <form class="login-form" id="loginForm">
+    <div class="role-switch" id="roleSwitch" role="radiogroup" aria-label="Hesap tipi">
+      <button type="button" class="role-opt active" data-role="user" role="radio" aria-checked="true" data-en="User">Kullanıcı</button>
+      <button type="button" class="role-opt" data-role="seller" role="radio" aria-checked="false" data-en="Seller">Satıcı</button>
+    </div>
+    <label data-en="Email">E-posta<input type="email" name="email" placeholder="ornek@rugen.com" data-en-placeholder="name@rugen.com" required></label>
+    <label data-en="Password">Parola<input type="password" name="password" placeholder="••••••••" required></label>
+    <button type="submit" class="btn btn-login" data-en="Sign In">Giriş Yap</button>
+    <p class="login-error" id="loginError"></p>
+  </form>
+  <p class="login-alt" data-en="Don't have an account?">Hesabınız yok mu? <a href="kayit.html" data-en="Sign up">Kayıt olun</a></p>
+  <p class="login-note" data-en="This demo site has no real account system.">Bu demo sitede gerçek bir hesap sistemi bulunmuyor.</p>
+  </div>
+
+  <div class="login-state in">
+    <h3 data-en="Your Account">Hesabınız</h3>
+    <p class="login-sub" id="accountRoleText" data-en="You are signed in as a User.">Kullanıcı olarak giriş yaptınız.</p>
+    <div class="account-panel">
+      <div class="account-row"><span class="k" data-en="Account Type">Hesap Tipi</span><span class="v" id="accountRoleName" data-en="User">Kullanıcı</span></div>
+      <div class="account-row"><span class="k" data-en="Email">E-posta</span><span class="v" id="accountEmail">—</span></div>
+    </div>
+    <button type="button" class="btn btn-login" id="logoutBtn" data-en="Sign Out">Çıkış Yap</button>
+  </div>
+</div>
+
+<section class="hero bg-dark">
+  <svg class="topo" viewBox="0 0 1200 800" preserveAspectRatio="none">
+    <g fill="none" stroke="#D8C9AE" stroke-width="1">
+      <path d="M-50,650 C 200,600 350,700 600,640 C 850,580 1000,660 1250,600" opacity="0.5"/>
+      <path d="M-50,700 C 200,660 350,740 600,690 C 850,640 1000,710 1250,660" opacity="0.4"/>
+      <path d="M-50,750 C 200,720 350,780 600,740 C 850,700 1000,760 1250,720" opacity="0.3"/>
+      <path d="M-50,120 C 250,60 400,160 700,90 C 950,40 1050,120 1250,70" opacity="0.35"/>
+      <path d="M-50,170 C 250,120 400,210 700,150 C 950,100 1050,170 1250,130" opacity="0.25"/>
+    </g>
+  </svg>
+  <div class="hero-eyebrow">TACTICAL / OUTDOOR / EVERYDAY CARRY</div>
+  <h1>MADE TO <span class="rust">ENDURE</span></h1>
+  <p class="sub" data-en="Function without excess. Equipment built for demanding conditions — simple on the surface, seriously resolved in the details.">Fazlalık olmadan işlev. Zorlu kullanım koşulları için tasarlanmış, sade görünen ancak ayrıntıları ciddi biçimde çözülmüş ekipmanlar.</p>
+  <div class="hero-actions">
+    <a href="shop.html" class="btn btn-primary" data-en="Explore the Collection">Koleksiyonu Keşfet</a>
+    <a href="#hikaye" class="btn btn-outline" data-en="Brand Story">Marka Hikayesi</a>
+  </div>
+  <div class="scroll-cue"><span data-en="SCROLL">KAYDIR</span><span class="line"></span></div>
+</section>
+
+<section class="statement reveal" id="hikaye">
+  <blockquote data-en="RUGEN removes the unnecessary.">
+    RUGEN, gereksiz detayı kaldırır. <em data-en="It delivers performance, durability and ease of use together — without a single unproven claim.">Performans, dayanıklılık ve kullanım kolaylığını bir arada sunar — kanıtlanmamış hiçbir iddia taşımadan.</em>
+  </blockquote>
+  <cite data-en="Minimal · Durable · Functional">Minimal · Dayanıklı · Fonksiyonel</cite>
+</section>
+
+<section id="urunler">
+
+  <div class="product dark bg-dark">
+    <div class="product-inner reveal">
+      <div class="product-copy">
+        <span class="tag" data-en="MODULAR SERIES">MODULAR SERİSİ</span>
+        <h2>TACTICAL BELT</h2>
+        <p data-en="A two-layer quick-release tactical belt. Carbon-reinforced wings, an aluminum buckle and a MOLLE-compatible outer band.">İki katmanlı hızlı çıkarmalı taktik kemer. Karbon takviyeli kanatlar, alüminyum toka ve MOLLE uyumlu dış şerit.</p>
+        <div class="specs"><span><b>2</b><span data-en="Layers">Katman</span></span><span><b>Alüminyum</b><span data-en="Buckle">Toka</span></span><span><b>MOLLE</b><span data-en="Compatibility">Uyum</span></span></div>
+        <a href="products/tactical-belt.html" class="learn" data-en="View details →">Detayları gör →</a>
+      </div>
+      <div class="product-visual photo"><div class="prod-photo p-tactical-belt"></div></div>
+    </div>
+  </div>
+
+  <div class="product light rev">
+    <div class="product-inner reveal">
+      <div class="product-copy">
+        <span class="tag" data-en="TACTICAL SERIES">TACTICAL SERİSİ</span>
+        <h2>PLATE CARRIER VEST</h2>
+        <p data-en="An adjustable plate carrier with shoulder and side panels. Laser-cut MOLLE, quick-release and breathable padding.">Ayarlanabilir omuz ve yan panelli plaka taşıyıcı yelek. Lazer kesim MOLLE, hızlı çıkarma ve nefes alan iç ped.</p>
+        <div class="specs"><span><b>SAPI</b><span data-en="Plate">Plaka</span></span><span><b>Lazer</b><span data-en="MOLLE">MOLLE</span></span><span><b>Hızlı</b><span data-en="Release">Çıkarma</span></span></div>
+        <a href="products/plate-carrier.html" class="learn" data-en="View details →">Detayları gör →</a>
+      </div>
+      <div class="product-visual photo"><div class="prod-photo p-plate-carrier"></div></div>
+    </div>
+  </div>
+
+  <div class="product sand">
+    <div class="product-inner reveal">
+      <div class="product-copy">
+        <span class="tag" data-en="CARRY SERIES">CARRY SERİSİ</span>
+        <h2>LEVEL 1 HOLSTER</h2>
+        <p data-en="A Level 1 retention holster with a Kydex shell. Adjustable cant and retention, camo finish; low-profile concealed carry.">Kydex gövdeli Level 1 tutuşlu kılıf. Ayarlanabilir açı ve retention, kamuflaj kaplama; düşük profilli gizli taşıma.</p>
+        <div class="specs"><span><b>Level 1</b><span data-en="Retention">Tutuş</span></span><span><b>Kydex</b><span data-en="Material">Malzeme</span></span><span><b>IWB/OWB</b><span data-en="Carry">Taşıma</span></span></div>
+        <a href="products/holster.html" class="learn" data-en="View details →">Detayları gör →</a>
+      </div>
+      <div class="product-visual photo"><div class="prod-photo p-holster"></div></div>
+    </div>
+  </div>
+
+  <div class="product dark rev bg-dark">
+    <div class="product-inner reveal">
+      <div class="product-copy">
+        <span class="tag" data-en="FIELD SERIES">FIELD SERİSİ</span>
+        <h2>TACTICAL HEAD LAMP</h2>
+        <p data-en="A rechargeable tactical head lamp with three light sources. Cap clip and elastic strap, spot + flood modes, 1000 lumens.">Üç ışık kaynaklı, şarj edilebilir taktik kafa lambası. Şapka klipsi ve elastik bant, spot + flood modları, 1000 lümen.</p>
+        <div class="specs"><span><b>1000</b><span data-en="Lumens">Lümen</span></span><span><b>USB-C</b><span data-en="Charging">Şarj</span></span><span><b>IPX4</b><span data-en="Water">Su Direnci</span></span></div>
+        <a href="products/head-lamp.html" class="learn" data-en="View details →">Detayları gör →</a>
+      </div>
+      <div class="product-visual photo"><div class="prod-photo p-head-lamp"></div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center; padding:70px 24px 100px; background:var(--offwhite);">
+    <a href="shop.html" class="btn" style="background:var(--charcoal); color:var(--offwhite);" data-en="View the Full Collection">Tüm Koleksiyonu Gör</a>
+  </div>
+</section>
+
+<section class="proof reveal bg-dark" id="kanit">
+  <div class="proof-head">
+    <span class="tag" data-en="Tested. Repairable. Ready.">Test Edildi. Onarılabilir. Hazır.</span>
+    <h2 data-en="Proof, not claims.">İddia değil, kanıt.</h2>
+    <p data-en="Every RUGEN product is tested in the field and in the lab before it reaches the catalogue. Instead of saying &quot;the best&quot; or &quot;unbreakable&quot;, we share measured, documented data.">Her RUGEN ürünü, kataloğa yazmadan önce sahada ve laboratuvarda test edilir. "En iyi" veya "kırılmaz" demek yerine, ölçülü ve kanıtlı bilgiyi paylaşırız.</p>
+  </div>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="num">01</div>
+      <h3 data-en="Load Test">Yük Testi</h3>
+      <p data-en="Suspension and repeated lifting with a defined weight. Sample, date and result are recorded.">Tanımlı ağırlıkla asma ve tekrarlı kaldırma. Numune, tarih ve sonuç kayıt altına alınır.</p>
+    </div>
+    <div class="proof-card">
+      <div class="num">02</div>
+      <h3 data-en="Seam Pull">Dikiş Çekme</h3>
+      <p data-en="Tension and deformation checks at critical points, with per-point results.">Kritik noktalarda çekme ve deformasyon kontrolü, nokta bazlı sonuçlarla.</p>
+    </div>
+    <div class="proof-card">
+      <div class="num">03</div>
+      <h3 data-en="Zipper Cycle">Fermuar Döngüsü</h3>
+      <p data-en="A set number of open-close cycles; cycle count and failure rate are reported.">Belirli sayıda açma-kapama testi; döngü sayısı ve arıza oranı raporlanır.</p>
+    </div>
+    <div class="proof-card">
+      <div class="num">04</div>
+      <h3 data-en="Water Resistance">Su Direnci</h3>
+      <p data-en="Rain or controlled spray testing establishes conditions and any ingress points.">Yağmur veya kontrollü spreyleme testi ile koşul ve sızma noktası belirlenir.</p>
+    </div>
+    <div class="proof-card">
+      <div class="num">05</div>
+      <h3 data-en="Drop Test">Düşme Testi</h3>
+      <p data-en="Dropped from a defined height with internal load; the damage class is recorded.">Tanımlı yükseklik ve iç yükle düşürme; hasar sınıfı kayıt altına alınır.</p>
+    </div>
+    <div class="proof-card">
+      <div class="num">06</div>
+      <h3 data-en="UV / Colour">UV / Renk</h3>
+      <p data-en="Colour shift is measured through sun exposure or laboratory testing.">Güneş maruziyeti veya laboratuvar testiyle renk değişimi ölçülür.</p>
+    </div>
+  </div>
+</section>
+
+<section class="material reveal" id="malzeme">
+  <div class="material-grid">
+    <div class="material-copy">
+      <span class="tag" data-en="Visual Identity">Görsel Kimlik</span>
+      <h2 data-en="Industrial simplicity, in natural terrain tones.">Endüstriyel sadelik, doğal arazi tonlarıyla.</h2>
+      <p data-en="Matte surfaces, controlled compositions, technical details — without ever turning into a cold, corporate defence-industry look. RUGEN's colour system holds that balance.">Mat yüzeyler, kontrollü kompozisyonlar, teknik detaylar — ama asla soğuk ve kurumsal bir savunma sanayi görünümüne dönüşmeden. RUGEN'in renk sistemi bu dengeyi taşır.</p>
+    </div>
+    <div class="swatches">
+      <div class="swatch" style="background:#1F211E; color:#F4F1E9;">
+        <span class="hex">#1F211E</span>
+        <span>Rugen Charcoal</span>
+      </div>
+      <div class="swatch" style="background:#4E5740; color:#F4F1E9;">
+        <span class="hex">#4E5740</span>
+        <span>Field Olive</span>
+      </div>
+      <div class="swatch" style="background:#D8C9AE; color:#1F211E;">
+        <span class="hex">#D8C9AE</span>
+        <span>Utility Sand</span>
+      </div>
+      <div class="swatch" style="background:#F4F1E9; color:#1F211E; border:1px solid rgba(31,33,30,.1);">
+        <span class="hex">#F4F1E9</span>
+        <span>Off White</span>
+      </div>
+      <div class="swatch" style="background:#9A4F2E; color:#F4F1E9;">
+        <span class="hex">#9A4F2E</span>
+        <span>Oxide Rust</span>
+      </div>
+      <div class="swatch" style="background:#6E716B; color:#F4F1E9;">
+        <span class="hex">#6E716B</span>
+        <span>Equipment Gray</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="values reveal" id="degerler">
+  <div class="values-head">
+    <span class="tag" data-en="Brand Values">Marka Değerleri</span>
+    <h2 data-en="Less show. More function.">Az görüntü. Fazla işlev.</h2>
+  </div>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="idx">01</div>
+      <h3 data-en="Minimalism">Minimalizm</h3>
+      <p data-en="Rejecting pockets, panels and decorative details added purely for looks.">Görüntü için eklenen gereksiz cep, panel ve dekoratif detayı reddetmek.</p>
+    </div>
+    <div class="value-card">
+      <div class="idx">02</div>
+      <h3 data-en="Durability">Dayanıklılık</h3>
+      <p data-en="Thinking through material, stitching and attachment points across the product’s whole life.">Malzeme, dikiş ve bağlantı noktası mantığını ürünün ömrü boyunca düşünmek.</p>
+    </div>
+    <div class="value-card">
+      <div class="idx">03</div>
+      <h3 data-en="Functionality">Fonksiyonellik</h3>
+      <p data-en="Every detail serving a specific use scenario.">Her detayın belirli bir kullanım senaryosuna hizmet etmesi.</p>
+    </div>
+    <div class="value-card">
+      <div class="idx">04</div>
+      <h3 data-en="Honesty">Dürüstlük</h3>
+      <p data-en="Never overstating capacity, water resistance or performance.">Kapasite, su direnci ve performans iddialarını abartmamak.</p>
+    </div>
+    <div class="value-card">
+      <div class="idx">05</div>
+      <h3 data-en="Repairability">Onarılabilirlik</h3>
+      <p data-en="Offering part replacement, repair and maintenance support wherever possible.">Mümkün olan ürünlerde parça değişimi, tamir ve bakım desteği sunmak.</p>
+    </div>
+    <div class="value-card">
+      <div class="idx">06</div>
+      <h3 data-en="Consistency">Tutarlılık</h3>
+      <p data-en="Holding the same character across the product family, design language, photography and copy.">Ürün ailesi, tasarım dili, fotoğraf ve metinlerde aynı karakteri korumak.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta bg-dark">
+  <h2>RUGEN IS BUILT.<br><span class="rust">NOT DECORATED.</span></h2>
+  <p data-en="The first collection was designed for real use: tested, simplified and built to last.">İlk koleksiyon, gerçek kullanım için tasarlandı; test edildi, sadeleştirildi ve uzun süre kullanılmak üzere üretildi.</p>
+  <div class="hero-actions">
+    <a href="shop.html" class="btn btn-primary" data-en="Explore the Collection">Koleksiyonu Keşfet</a>
+    <a href="#iletisim" class="btn btn-outline" data-en="Corporate Supply">Kurumsal Tedarik</a>
+  </div>
+</section>
+<footer id="iletisim" class="bg-dark">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="brand-img mark mark-light" aria-hidden="true"></span>
+        <span class="brand-img word word-light" aria-hidden="true"></span>
+      </div>
+      <p data-en="A minimal, durable and functional equipment brand across tactical, outdoor and everyday carry. Made in Türkiye.">Taktik, açık hava ve günlük taşıma kategorilerinde minimalist, dayanıklı ve fonksiyonel bir ekipman markası. Türkiye’de üretilmiştir.</p>
+      <span class="footer-seal" role="img" aria-label="RUGEN — Built for Purpose"></span>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Shop">Mağaza</h4>
+      <a href="products/tactical-belt.html" data-en="Modular Series">Modular Serisi</a>
+      <a href="products/plate-carrier.html" data-en="Tactical Series">Tactical Serisi</a>
+      <a href="products/holster.html" data-en="Carry Series">Carry Serisi</a>
+      <a href="shop.html" data-en="All Products">Tüm Ürünler</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Brand">Marka</h4>
+      <a href="index.html#hikaye" data-en="About Us">Hakkımızda</a>
+      <a href="index.html#malzeme" data-en="Visual Identity">Görsel Kimlik</a>
+      <a href="index.html#degerler" data-en="Values">Değerler</a>
+      <a href="index.html#kanit">Field Notes</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Service">Servis</h4>
+      <a href="garanti.html" data-en="Warranty">Garanti</a>
+      <a href="servis.html" data-en="Repair &amp; Care">Tamir &amp; Bakım</a>
+      <a href="yedek-parca.html" data-en="Spare Parts">Yedek Parça</a>
+      <a href="sss.html" data-en="FAQ">Sıkça Sorulanlar</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Corporate">Kurumsal</h4>
+      <a href="toptan.html" data-en="Wholesale">Toptan Tedarik</a>
+      <a href="ozel-uretim.html" data-en="Custom Production">Özel Üretim</a>
+      <a href="basin.html" data-en="Press">Basın</a>
+      <a href="iletisim.html" data-en="Contact">İletişim</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span data-en="© 2026 RUGEN. ALL RIGHTS RESERVED.">© 2026 RUGEN. TÜM HAKLARI SAKLIDIR.</span>
+    <span>MADE TO ENDURE — FUNCTION WITHOUT EXCESS</span>
+  </div>
+</footer>
+<div class="vault-transition" id="vaultTransition" aria-hidden="true">
+  <div class="vault-anim">
+    <span class="vault-frame"></span>
+    <span class="vault-wheel"></span>
+  </div>
+  <div class="vault-caption" data-en="Unlocking">Kasa açılıyor</div>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

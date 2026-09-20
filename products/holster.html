@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Level 1 Holster — RUGEN</title>
+<meta name="description" content="Günlük taşıma ve saha kullanımı için 20 litrelik kompakt sırt çantası.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<header id="siteHeader">
+  <a class="logo" aria-label="RUGEN" href="../index.html">
+    <span class="brand-img mark mark-dark" aria-hidden="true"></span>
+    <span class="brand-img mark mark-light" aria-hidden="true"></span>
+    <span class="brand-img word word-dark" aria-hidden="true"></span>
+    <span class="brand-img word word-light" aria-hidden="true"></span>
+  </a>
+  <nav class="links">
+    <a href="../shop.html" class="active" data-en="Products">Ürünler</a>
+    <a href="../index.html#kanit" data-en="Testing &amp; Proof">Test &amp; Kanıt</a>
+    <a href="../index.html#malzeme" data-en="Materials">Malzeme</a>
+    <a href="../index.html#degerler" data-en="Brand">Marka</a>
+    <a href="../index.html#iletisim" data-en="Contact">İletişim</a>
+  </nav>
+  <div class="header-actions">
+    <button class="lang-toggle" id="langToggle" role="switch" aria-checked="false" aria-label="Language / Dil">
+      <span class="lang-track">
+        <span class="lang-knob"></span>
+        <span class="lang-opt">TR</span>
+        <span class="lang-opt">EN</span>
+      </span>
+    </button>
+    <div class="kasa-wrap">
+      <button class="kasa-toggle" id="kasaToggle" aria-label="Arayüz Seçenekleri" aria-haspopup="true" aria-expanded="false"><span class="icon-mask icon-vault" aria-hidden="true"></span></button>
+      <div class="iface-menu" id="ifaceMenu">
+        <h5 data-en="Interfaces">Arayüzler</h5>
+        <a href="../kasa.html" class="iface-user" data-en="Product Vault">Ürün Kasası</a>
+        <a href="../siparislerim.html" class="iface-seller" data-en="My Orders">Siparişlerim</a>
+      </div>
+    </div>
+    <button class="login-toggle" id="loginToggle" aria-label="Giriş"><span class="icon-mask icon-login" aria-hidden="true"></span></button>
+    <button class="cart-toggle" id="cartToggle" aria-label="Sepet">
+      <span class="icon-mask icon-cart" aria-hidden="true"></span>
+      <span class="cart-count" id="cartCount" hidden>0</span>
+    </button>
+    <button class="menu-toggle" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3 data-en="Your Cart">Sepetiniz</h3>
+    <button class="cart-close" id="cartClose" aria-label="Kapat">&#10005;</button>
+  </div>
+  <div class="cart-items" id="cartItems"><p class="cart-empty" data-en="Your cart is empty.">Sepetiniz boş.</p></div>
+  <div class="cart-foot">
+    <div class="cart-total"><span data-en="Subtotal">Ara Toplam</span><span id="cartTotal">₺0</span></div>
+    <a href="../odeme.html" class="btn btn-cart-checkout" id="cartCheckout" data-en="Complete Order">Siparişi Tamamla</a>
+  </div>
+</aside>
+
+<div class="login-overlay" id="loginOverlay"></div>
+<div class="login-modal" id="loginModal" role="dialog" aria-label="Giriş">
+  <button class="login-close" id="loginClose" aria-label="Kapat">&#10005;</button>
+  <div class="login-mark"><span class="icon-mask icon-login" aria-hidden="true"></span></div>
+  <div class="login-state out">
+  <h3 data-en="Sign In">Giriş Yap</h3>
+  <p class="login-sub" data-en="Sign in to your product dashboard.">Ürün kontrol paneliniz için giriş yapın.</p>
+  <form class="login-form" id="loginForm">
+    <div class="role-switch" id="roleSwitch" role="radiogroup" aria-label="Hesap tipi">
+      <button type="button" class="role-opt active" data-role="user" role="radio" aria-checked="true" data-en="User">Kullanıcı</button>
+      <button type="button" class="role-opt" data-role="seller" role="radio" aria-checked="false" data-en="Seller">Satıcı</button>
+    </div>
+    <label data-en="Email">E-posta<input type="email" name="email" placeholder="ornek@rugen.com" data-en-placeholder="name@rugen.com" required></label>
+    <label data-en="Password">Parola<input type="password" name="password" placeholder="••••••••" required></label>
+    <button type="submit" class="btn btn-login" data-en="Sign In">Giriş Yap</button>
+    <p class="login-error" id="loginError"></p>
+  </form>
+  <p class="login-alt" data-en="Don't have an account?">Hesabınız yok mu? <a href="../kayit.html" data-en="Sign up">Kayıt olun</a></p>
+  <p class="login-note" data-en="This demo site has no real account system.">Bu demo sitede gerçek bir hesap sistemi bulunmuyor.</p>
+  </div>
+
+  <div class="login-state in">
+    <h3 data-en="Your Account">Hesabınız</h3>
+    <p class="login-sub" id="accountRoleText" data-en="You are signed in as a User.">Kullanıcı olarak giriş yaptınız.</p>
+    <div class="account-panel">
+      <div class="account-row"><span class="k" data-en="Account Type">Hesap Tipi</span><span class="v" id="accountRoleName" data-en="User">Kullanıcı</span></div>
+      <div class="account-row"><span class="k" data-en="Email">E-posta</span><span class="v" id="accountEmail">—</span></div>
+    </div>
+    <button type="button" class="btn btn-login" id="logoutBtn" data-en="Sign Out">Çıkış Yap</button>
+  </div>
+</div>
+
+
+<section class="pdp-hero bg-dark">
+  <div class="pdp-visual photo"><div class="prod-photo p-holster"></div></div>
+  <div class="pdp-copy">
+    <span class="fam" data-en="CARRY SERIES">CARRY SERİSİ</span>
+    <h1>LEVEL 1 HOLSTER</h1>
+    <p class="lead" data-en="A Level 1 retention holster with a Kydex shell. Adjustable cant and retention, camo finish; a low profile for daily concealed carry.">Kydex gövdeli Level 1 tutuşlu kılıf. Ayarlanabilir açı ve retention, kamuflaj kaplama; günlük gizli taşıma için düşük profil.</p>
+    <div class="pdp-price gated">₺2.300 <span class="note" data-en="VAT Included">KDV Dahil</span></div>
+    <div class="pdp-stock gated" data-stock-slug="holster" data-stock-fmt="units"></div>
+    <div class="pdp-actions">
+      <button class="btn btn-primary add-cart" data-slug="holster" data-name="LEVEL 1 HOLSTER" data-price="2300">
+        <span class="label" data-en="Add to Cart">Sepete Ekle</span>
+        <span class="check" data-en="Added ✓">Eklendi ✓</span>
+      </button>
+      <a href="#specs" class="btn btn-outline" data-en="Specifications">Teknik Özellikler</a>
+    </div>
+    <div class="microspecs"><span><b>Level 1</b><span data-en="Retention">Tutuş</span></span><span><b>Kydex</b><span data-en="Material">Malzeme</span></span><span><b>IWB/OWB</b><span data-en="Carry">Taşıma</span></span></div>
+  </div>
+</section>
+
+<section class="feature-strip">
+  <div class="head reveal">
+    <span class="tag" data-en="Highlights">Öne Çıkanlar</span>
+    <h2 data-en="Why LEVEL 1 HOLSTER">Neden LEVEL 1 HOLSTER</h2>
+  </div>
+  <div class="feature-grid">
+    <div class="feature-item reveal">
+      <div class="n">01</div>
+      <h3 data-en="Adjustable Retention">Ayarlanabilir Retention</h3>
+      <p data-en="Retention tension is screw-adjustable with a crisp “click” feedback.">Tutuş sıkılığı vidayla ayarlanır; net bir “klik” geri bildirimi verir.</p>
+    </div>
+    <div class="feature-item reveal">
+      <div class="n">02</div>
+      <h3 data-en="Adjustable Cant">Ayarlanabilir Açı</h3>
+      <p data-en="Carry angle adjusts to the user via the belt clip.">Kemer klipsi ile taşıma açısı kişiye göre ayarlanır.</p>
+    </div>
+    <div class="feature-item reveal">
+      <div class="n">03</div>
+      <h3 data-en="Kydex Shell">Kydex Gövde</h3>
+      <p data-en="Heat-formed Kydex resists sweat and impact and keeps its shape.">Isıl şekillendirilmiş Kydex; teri ve darbeyi kaldırır, formunu korur.</p>
+    </div>
+    <div class="feature-item reveal">
+      <div class="n">04</div>
+      <h3 data-en="Low Profile">Düşük Profil</h3>
+      <p data-en="A slim build and camo finish stay discreet for concealed carry.">İnce yapı ve kamuflaj kaplama gizli taşımada belli olmaz.</p>
+    </div>
+  </div>
+</section>
+
+<section class="photo-band"><div class="prod-photo p-holster"></div></section>
+
+<section class="spec-sheet" id="specs">
+  <div class="head reveal">
+    <span class="tag" data-en="Technical Data">Teknik Veri</span>
+    <h2 data-en="Specifications">Spesifikasyonlar</h2>
+  </div>
+  <div class="spec-table reveal">
+    <div class="spec-row"><span class="k" data-en="Material">Malzeme</span><span class="v" data-en="Heat-formed Kydex">Isıl şekilli Kydex</span></div>
+    <div class="spec-row"><span class="k" data-en="Retention">Tutuş</span><span class="v" data-en="Level 1, adjustable">Level 1, ayarlanabilir</span></div>
+    <div class="spec-row"><span class="k" data-en="Cant">Açı</span><span class="v" data-en="0–30° adjustable">0–30° ayarlanabilir</span></div>
+    <div class="spec-row"><span class="k" data-en="Carry">Taşıma</span><span class="v" data-en="IWB / OWB">IWB / OWB</span></div>
+    <div class="spec-row"><span class="k" data-en="Compatibility">Uyumluluk</span><span class="v" data-en="Common compact pistols">Yaygın kompakt tabancalar</span></div>
+    <div class="spec-row"><span class="k" data-en="Weight">Ağırlık</span><span class="v" data-en="110 g">110 g</span></div>
+    <div class="spec-row"><span class="k" data-en="Origin">Menşe</span><span class="v" data-en="Made in Türkiye">Made in Türkiye</span></div>
+  </div>
+</section>
+
+<section class="related">
+  <div class="head reveal">
+    <span class="tag" data-en="Works Together">Birlikte Kullanılabilir</span>
+    <h2 data-en="Related Products">İlgili Ürünler</h2>
+  </div>
+  <div class="related-grid reveal">
+    <a class="product-card" data-family="modular" href="tactical-belt.html">
+      <div class="card-visual photo"><div class="prod-photo p-tactical-belt"></div></div>
+      <span class="fam" data-en="MODULAR SERIES">MODULAR SERİSİ</span>
+      <h3>TACTICAL BELT</h3>
+      <p data-en="A carbon-reinforced quick-release tactical belt system.">Karbon takviyeli, hızlı çıkarmalı taktik kemer sistemi.</p>
+      <div class="card-foot">
+        <span class="price gated">₺7.600</span><span class="stock gated"></span>
+        <span class="go" data-en="View →">İncele →</span>
+      </div>
+    </a>
+    <a class="product-card" data-family="tactical" href="plate-carrier.html">
+      <div class="card-visual photo"><div class="prod-photo p-plate-carrier"></div></div>
+      <span class="fam" data-en="TACTICAL SERIES">TACTICAL SERİSİ</span>
+      <h3>PLATE CARRIER VEST</h3>
+      <p data-en="An adjustable plate carrier vest with laser-cut MOLLE panels.">Lazer kesim MOLLE panelli, ayarlanabilir plaka taşıyıcı yelek.</p>
+      <div class="card-foot">
+        <span class="price gated">₺12.300</span><span class="stock gated"></span>
+        <span class="go" data-en="View →">İncele →</span>
+      </div>
+    </a>
+    <a class="product-card" data-family="field" href="head-lamp.html">
+      <div class="card-visual photo"><div class="prod-photo p-head-lamp"></div></div>
+      <span class="fam" data-en="FIELD SERIES">FIELD SERİSİ</span>
+      <h3>TACTICAL HEAD LAMP</h3>
+      <p data-en="A 1000-lumen rechargeable tactical head lamp with a cap clip.">1000 lümen, şarj edilebilir, şapka klipsli taktik kafa lambası.</p>
+      <div class="card-foot">
+        <span class="price gated">₺9.500</span><span class="stock gated"></span>
+        <span class="go" data-en="View →">İncele →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer id="iletisim" class="bg-dark">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="brand-img mark mark-light" aria-hidden="true"></span>
+        <span class="brand-img word word-light" aria-hidden="true"></span>
+      </div>
+      <p data-en="A minimal, durable and functional equipment brand across tactical, outdoor and everyday carry. Made in Türkiye.">Taktik, açık hava ve günlük taşıma kategorilerinde minimalist, dayanıklı ve fonksiyonel bir ekipman markası. Türkiye’de üretilmiştir.</p>
+      <span class="footer-seal" role="img" aria-label="RUGEN — Built for Purpose"></span>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Shop">Mağaza</h4>
+      <a href="../products/tactical-belt.html" data-en="Modular Series">Modular Serisi</a>
+      <a href="../products/plate-carrier.html" data-en="Tactical Series">Tactical Serisi</a>
+      <a href="../products/holster.html" data-en="Carry Series">Carry Serisi</a>
+      <a href="../shop.html" data-en="All Products">Tüm Ürünler</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Brand">Marka</h4>
+      <a href="../index.html#hikaye" data-en="About Us">Hakkımızda</a>
+      <a href="../index.html#malzeme" data-en="Visual Identity">Görsel Kimlik</a>
+      <a href="../index.html#degerler" data-en="Values">Değerler</a>
+      <a href="../index.html#kanit">Field Notes</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Service">Servis</h4>
+      <a href="../garanti.html" data-en="Warranty">Garanti</a>
+      <a href="../servis.html" data-en="Repair &amp; Care">Tamir &amp; Bakım</a>
+      <a href="../yedek-parca.html" data-en="Spare Parts">Yedek Parça</a>
+      <a href="../sss.html" data-en="FAQ">Sıkça Sorulanlar</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Corporate">Kurumsal</h4>
+      <a href="../toptan.html" data-en="Wholesale">Toptan Tedarik</a>
+      <a href="../ozel-uretim.html" data-en="Custom Production">Özel Üretim</a>
+      <a href="../basin.html" data-en="Press">Basın</a>
+      <a href="../iletisim.html" data-en="Contact">İletişim</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span data-en="© 2026 RUGEN. ALL RIGHTS RESERVED.">© 2026 RUGEN. TÜM HAKLARI SAKLIDIR.</span>
+    <span>MADE TO ENDURE — FUNCTION WITHOUT EXCESS</span>
+  </div>
+</footer>
+<div class="vault-transition" id="vaultTransition" aria-hidden="true">
+  <div class="vault-anim">
+    <span class="vault-frame"></span>
+    <span class="vault-wheel"></span>
+  </div>
+  <div class="vault-caption" data-en="Unlocking">Kasa açılıyor</div>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

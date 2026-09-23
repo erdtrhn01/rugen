@@ -2,7 +2,7 @@
 
 Statik marka ve katalog sitesi — **Made to Endure**.
 
-Canlı: https://rugen.com
+Canlı: https://rugen.com.tr
 
 - Saf HTML / CSS / JS, derleme adımı yok.
 - Sepet, oturum ve siparişler tarayıcıda (`localStorage`) tutulur; arka uç yoktur.

@@ -21,9 +21,9 @@ var RG_LOGO={"sym":{"w":232,"h":233,"light":["M205.00,206.54 L183.00,206.56 L181
   var T = {
     symbol: [{ s: 180, d: 900 }, { s: 980, d: 420 }, { s: 1300, d: 340 }],
     wordStart: 1520, wordStep: 190, wordDur: 420,
-    settle: 2900,
-    flyStart: 2980, flyDur: 700,
-    end: 4250
+    settle: 3400,
+    flyStart: 4150, flyDur: 1050,
+    end: 5750
   };
   var COOL = 700;              // ms for a shape to cool from hot to brand colour
   var HOT = [255, 233, 176];   // molten
@@ -341,7 +341,7 @@ var RG_LOGO={"sym":{"w":232,"h":233,"light":["M205.00,206.54 L183.00,206.56 L181
   window.addEventListener('touchstart', requestSkip, { once: true, passive: true });
 
   // failsafe — never leave the page hidden
-  setTimeout(function () { if (!finished) done(); }, 6000);
+  setTimeout(function () { if (!finished) done(); }, 9000);
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', start);

@@ -9,6 +9,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
+<script>
+/* RUGEN intro — decide before first paint so the page never flashes */
+(function(){try{
+  var d=document.documentElement;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  try{if(sessionStorage.getItem('rugen-intro-v1')==='1')return;}catch(e){}
+  d.className+=(d.className?' ':'')+'rg-intro';
+  var s=document.createElement('style');
+  s.textContent='html.rg-intro,html.rg-intro body{overflow:hidden}html.rg-intro{background:#1F211E}html.rg-intro body>*:not(#rgIntro){opacity:0}';
+  document.head.appendChild(s);
+  setTimeout(function(){d.classList.remove('rg-intro');d.classList.remove('rg-reveal');},6000);
+}catch(e){}})();
+</script>
+<script src="assets/intro.js" defer></script>
 </head>
 <body>
 <header id="siteHeader">

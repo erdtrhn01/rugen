@@ -19,13 +19,13 @@ var RG_LOGO={"sym":{"w":232,"h":233,"light":["M205.00,206.54 L183.00,206.56 L181
 
   // ---------------------------------------------------------------- timings
   var T = {
-    symbol: [{ s: 120, d: 520 }, { s: 560, d: 240 }, { s: 720, d: 200 }],
-    wordStart: 840, wordStep: 112, wordDur: 250,
-    settle: 1760,
-    flyStart: 1800, flyDur: 540,
-    end: 2760
+    symbol: [{ s: 180, d: 900 }, { s: 980, d: 420 }, { s: 1300, d: 340 }],
+    wordStart: 1520, wordStep: 190, wordDur: 420,
+    settle: 2900,
+    flyStart: 2980, flyDur: 700,
+    end: 4250
   };
-  var COOL = 520;              // ms for a shape to cool from hot to brand colour
+  var COOL = 700;              // ms for a shape to cool from hot to brand colour
   var HOT = [255, 233, 176];   // molten
   var LIGHT = [244, 241, 233]; // --offwhite
   var RUST = [154, 79, 46];    // --rust
@@ -271,7 +271,7 @@ var RG_LOGO={"sym":{"w":232,"h":233,"light":["M205.00,206.54 L183.00,206.56 L181
         var m = s.grp === gMark ? markFrom : wordFrom;
         var sx = m.x + pt.x * m.s, sy = m.y + pt.y * m.s;
         head(sx, sy, 1);
-        for (var k = 0; k < 3; k++) spark(sx, sy, 1.1, 150);
+        for (var k = 0; k < 2; k++) spark(sx, sy, 1.1, 150);
         s.fill.setAttribute('opacity', String(Math.min(0.9, e * 0.9)));
       } else if (!s.done) {
         s.done = true;
